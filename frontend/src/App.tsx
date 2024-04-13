@@ -2,6 +2,8 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./layouts/layout";
 import Register from "./pages/Register";
 import Signin from "./pages/Signin";
+import AddHotels from "./pages/AddHotels";
+import ProtectedRoute from "./pages/ProtectedRoute";
 
 function App() {
   return (
@@ -39,6 +41,18 @@ function App() {
             </Layout>
           }
         />
+
+        <Route
+          path="/add-hotel"
+          element={
+            <Layout>
+              <ProtectedRoute>
+                <AddHotels />
+              </ProtectedRoute>
+            </Layout>
+          }
+        />
+
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </BrowserRouter>
