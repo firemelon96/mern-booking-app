@@ -49,7 +49,6 @@ const ManageHotelForm = ({ onSave, isPending }: Props) => {
     });
 
     onSave(data);
-    // console.log(formData);
   };
 
   return (

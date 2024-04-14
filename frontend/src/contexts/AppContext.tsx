@@ -18,19 +18,19 @@ const AppContext = createContext<AppContext | undefined>(undefined);
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
   const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
 
-  const { isSuccess } = useQuery({
+  const { isError } = useQuery({
     queryKey: ["validateToken"],
     queryFn: validateToken,
     retry: false,
   });
-  console.log(isSuccess);
+
   return (
     <AppContext.Provider
       value={{
         showToast: (toastMessage) => {
           setToast(toastMessage);
         },
-        isLoggedIn: isSuccess,
+        isLoggedIn: !isError,
       }}
     >
       {toast && (

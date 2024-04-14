@@ -3,9 +3,11 @@ import Layout from "./layouts/layout";
 import Register from "./pages/Register";
 import Signin from "./pages/Signin";
 import AddHotels from "./pages/AddHotels";
-import ProtectedRoute from "./pages/ProtectedRoute";
+import MyHotels from "./pages/MyHotels";
+import { useAppContext } from "./contexts/AppContext";
 
 function App() {
+  const { isLoggedIn } = useAppContext();
   return (
     <BrowserRouter>
       <Routes>
@@ -42,16 +44,27 @@ function App() {
           }
         />
 
-        <Route
-          path="/add-hotel"
-          element={
-            <Layout>
-              <ProtectedRoute>
-                <AddHotels />
-              </ProtectedRoute>
-            </Layout>
-          }
-        />
+        {isLoggedIn && (
+          <>
+            <Route
+              path="/add-hotel"
+              element={
+                <Layout>
+                  <AddHotels />
+                </Layout>
+              }
+            />
+
+            <Route
+              path="/my-hotels"
+              element={
+                <Layout>
+                  <MyHotels />
+                </Layout>
+              }
+            />
+          </>
+        )}
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
